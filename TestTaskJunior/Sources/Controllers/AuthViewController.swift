@@ -4,6 +4,19 @@ class AuthViewController: UIViewController {
 
     // MARK: - UIElements
 
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     private let loginLabel = UILabel(text: "Login", font: 25)
 
     private let emailTextField = UITextField.attributedTextField(text: "Enter email")
@@ -40,6 +53,11 @@ class AuthViewController: UIViewController {
         setupHierarchy()
         setupLayout()
         setupDelegate()
+        registerKeyboardNotification()
+    }
+
+    deinit {
+        removeKeyboardNotification()
     }
 
     // MARK: - Action
@@ -64,6 +82,7 @@ class AuthViewController: UIViewController {
 
     private var textFieldsStackView = UIStackView()
     private var buttonsStackView = UIStackView()
+    private var stackViewTextViewAndButtonView = UIStackView()
 
     func setupHierarchy() {
         title = "SingIn"
@@ -80,27 +99,39 @@ class AuthViewController: UIViewController {
                                        spacing: 10,
                                        distribution: .fillEqually)
 
-        view.addSubview(textFieldsStackView)
-        view.addSubview(loginLabel)
-        view.addSubview(buttonsStackView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(backgroundView)
+        backgroundView.addSubview(textFieldsStackView)
+        backgroundView.addSubview(loginLabel)
+        backgroundView.addSubview(buttonsStackView)
     }
 
     func setupLayout() {
         NSLayoutConstraint.activate([
-            textFieldsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textFieldsStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
-            textFieldsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            textFieldsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            loginLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backgroundView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+            backgroundView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            backgroundView.widthAnchor.constraint(equalTo: view.widthAnchor),
+
+            textFieldsStackView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            textFieldsStackView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+            textFieldsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
+            textFieldsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20),
+
+            loginLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
             loginLabel.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -30),
 
             signUpButton.heightAnchor.constraint(equalToConstant: 40),
             signInButton.heightAnchor.constraint(equalToConstant: 40),
 
-            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            buttonsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
             buttonsStackView.topAnchor.constraint(equalTo: textFieldsStackView.bottomAnchor, constant: 30),
-            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            buttonsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20),
         ])
     }
 }
@@ -113,5 +144,37 @@ extension AuthViewController: UITextFieldDelegate {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         return true
+    }
+}
+
+//MARK: - Keyboard Show Hide // поднимает над клавиатурой когда нажимаешь на текстфилд
+
+extension AuthViewController {
+
+    private func registerKeyboardNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardDidHideNotification,
+                                               object: nil)
+    }
+
+    private func removeKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc private func keyboardWillShow(notification: Notification) {
+        let userInfo = notification.userInfo
+        let keyboardHeight = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        scrollView.contentOffset = CGPoint(x: 0, y: keyboardHeight.height / 2)
+    }
+
+    @objc private func keyboardWillHide() {
+        scrollView.contentOffset = CGPoint.zero
     }
 }
