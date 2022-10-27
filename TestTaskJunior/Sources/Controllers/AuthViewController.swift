@@ -16,7 +16,7 @@ class AuthViewController: UIViewController {
         button.backgroundColor = .black
         button.tintColor = .white
         button.layer.cornerRadius = 10
-        button.addTarget(AuthViewController.self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -27,7 +27,7 @@ class AuthViewController: UIViewController {
         button.backgroundColor = .red
         button.tintColor = .white
         button.layer.cornerRadius = 10
-        button.addTarget(AuthViewController.self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -51,16 +51,16 @@ class AuthViewController: UIViewController {
 
     @objc private func signUpButtonTapped() {
         let signUpViewController = SignUpViewController()
-        self.present(signUpViewController, animated: true)
+        present(signUpViewController, animated: true)
     }
 
     @objc private func signInButtonTapped() {
-//        let navVC = UINavigationController(rootViewController: AlbumsViewController())
-//        navVC.modalPresentationStyle = .fullScreen
-//        self.present(navVC, animated: true)
+        let navVC = UINavigationController(rootViewController: AlbumsViewController())
+        navVC.modalPresentationStyle = .fullScreen
+        self.present(navVC, animated: true)
     }
 
-    // MARK: - Setup
+    // MARK: - Setups
 
     private var textFieldsStackView = UIStackView()
     private var buttonsStackView = UIStackView()

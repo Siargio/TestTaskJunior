@@ -46,10 +46,20 @@ class SignUpViewController: UIViewController {
         button.setTitle("SignUP", for: .normal)
         button.tintColor = .white
         button.layer.cornerRadius = 10
-        button.addTarget(SignUpViewController.self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+
+    private func setupDataPicker() {
+        datePicker.datePickerMode = .date
+        datePicker.backgroundColor = .white
+        datePicker.layer.borderColor = #colorLiteral(red: 0.8810099265, green: 0.8810099265, blue: 0.8810099265, alpha: 1)
+        datePicker.layer.borderWidth = 1
+        datePicker.clipsToBounds = true
+        datePicker.layer.cornerRadius = 6
+        datePicker.tintColor = .black
+    }
 
     private var elementsStackView = UIStackView()
     private let datePicker = UIDatePicker()
@@ -61,6 +71,8 @@ class SignUpViewController: UIViewController {
 
         setupHierarchy()
         setupLayout()
+        setupDelegate()
+        setupDataPicker()
     }
     // MARK: - Action
 
@@ -68,10 +80,11 @@ class SignUpViewController: UIViewController {
         print("SignUpTap")
     }
 
-    // MARK: - Setup
+    // MARK: - Setups
 
     func setupHierarchy() {
         title = "SignUp"
+        view.backgroundColor = .white
 
         elementsStackView = UIStackView(arrangedSubviews:
                                             [firstNameTextField,
@@ -99,7 +112,7 @@ class SignUpViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             elementsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            elementsStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            elementsStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -106),
             elementsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             elementsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 
