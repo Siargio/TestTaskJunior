@@ -70,3 +70,5 @@ class UserInfoViewController: UIViewController {
         ageLabel.text = dateString
     }
 }
+
+

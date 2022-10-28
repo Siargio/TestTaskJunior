@@ -10,6 +10,9 @@
 		EC7B7C9B290BDCB600CCB512 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B7C9A290BDCB600CCB512 /* UserDefaultsManager.swift */; };
 		EC7B7C9E290BDE9200CCB512 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B7C9D290BDE9200CCB512 /* UserModel.swift */; };
 		EC7B7CA0290BE4B000CCB512 /* AlertOk.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B7C9F290BE4B000CCB512 /* AlertOk.swift */; };
+		EC7B7CA2290BF8AC00CCB512 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B7CA1290BF8AC00CCB512 /* AlbumModel.swift */; };
+		EC7B7CA5290BF9F200CCB512 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B7CA4290BF9F200CCB512 /* NetworkRequest.swift */; };
+		EC7B7CA7290BFD7400CCB512 /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B7CA6290BFD7400CCB512 /* NetworkDataFetch.swift */; };
 		EC8D6D732908128C000C0F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D6D722908128C000C0F61 /* AppDelegate.swift */; };
 		EC8D6D752908128C000C0F61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D6D742908128C000C0F61 /* SceneDelegate.swift */; };
 		EC8D6D772908128C000C0F61 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D6D762908128C000C0F61 /* AuthViewController.swift */; };
@@ -32,6 +35,9 @@
 		EC7B7C9A290BDCB600CCB512 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		EC7B7C9D290BDE9200CCB512 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		EC7B7C9F290BE4B000CCB512 /* AlertOk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertOk.swift; sourceTree = "<group>"; };
+		EC7B7CA1290BF8AC00CCB512 /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
+		EC7B7CA4290BF9F200CCB512 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		EC7B7CA6290BFD7400CCB512 /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
 		EC8D6D6F2908128C000C0F61 /* TestTaskJunior.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTaskJunior.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC8D6D722908128C000C0F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC8D6D742908128C000C0F61 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,8 +82,18 @@
 			children = (
 				EC7B7C9D290BDE9200CCB512 /* UserModel.swift */,
 				EC7B7C9F290BE4B000CCB512 /* AlertOk.swift */,
+				EC7B7CA1290BF8AC00CCB512 /* AlbumModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EC7B7CA3290BF9DA00CCB512 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EC7B7CA4290BF9F200CCB512 /* NetworkRequest.swift */,
+				EC7B7CA6290BFD7400CCB512 /* NetworkDataFetch.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		EC8D6D662908128C000C0F61 = {
@@ -120,6 +136,7 @@
 			children = (
 				EC8D6D8929081607000C0F61 /* Controllers */,
 				EC7B7C9C290BDE7C00CCB512 /* Models */,
+				EC7B7CA3290BF9DA00CCB512 /* Network */,
 				EC7B7C99290BDC9D00CCB512 /* Services */,
 				EC8D6D8A29081611000C0F61 /* Extensions */,
 			);
@@ -258,13 +275,16 @@
 				ECBFC6D3290AA19A007DBB27 /* SongsCollectionViewCell.swift in Sources */,
 				ECBFC6CF290A89ED007DBB27 /* DetailAlbumViewController.swift in Sources */,
 				ECC2EC0B29097968000C4EA4 /* UIStackView + Extension.swift in Sources */,
+				EC7B7CA5290BF9F200CCB512 /* NetworkRequest.swift in Sources */,
 				EC7B7C9E290BDE9200CCB512 /* UserModel.swift in Sources */,
 				EC7B7CA0290BE4B000CCB512 /* AlertOk.swift in Sources */,
 				EC8D6D732908128C000C0F61 /* AppDelegate.swift in Sources */,
+				EC7B7CA2290BF8AC00CCB512 /* AlbumModel.swift in Sources */,
 				ECBFC6CD290A886B007DBB27 /* UserInfoViewController.swift in Sources */,
 				EC8D6D752908128C000C0F61 /* SceneDelegate.swift in Sources */,
 				ECBFC6C9290A8448007DBB27 /* AlbumsViewController.swift in Sources */,
 				ECBFC6D1290A8B83007DBB27 /* AlbumsTableViewCell.swift in Sources */,
+				EC7B7CA7290BFD7400CCB512 /* NetworkDataFetch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
