@@ -17,6 +17,8 @@ class SongsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Setup
+    
     func setupHierarchy() {
         self.addSubview(nameSongLabel)
     }

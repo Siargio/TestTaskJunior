@@ -121,6 +121,9 @@ extension AlbumsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailAlbumViewController = DetailAlbumViewController()
+        let album = albums[indexPath.row]
+        detailAlbumViewController.album = album
+        detailAlbumViewController.title = album.artistName
         navigationController?.pushViewController(detailAlbumViewController, animated: true)
     }
 }
