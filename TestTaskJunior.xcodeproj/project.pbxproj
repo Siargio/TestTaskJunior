@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC7B7C9B290BDCB600CCB512 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B7C9A290BDCB600CCB512 /* UserDefaultsManager.swift */; };
+		EC7B7C9E290BDE9200CCB512 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B7C9D290BDE9200CCB512 /* UserModel.swift */; };
+		EC7B7CA0290BE4B000CCB512 /* AlertOk.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B7C9F290BE4B000CCB512 /* AlertOk.swift */; };
 		EC8D6D732908128C000C0F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D6D722908128C000C0F61 /* AppDelegate.swift */; };
 		EC8D6D752908128C000C0F61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D6D742908128C000C0F61 /* SceneDelegate.swift */; };
 		EC8D6D772908128C000C0F61 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D6D762908128C000C0F61 /* AuthViewController.swift */; };
@@ -26,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC7B7C9A290BDCB600CCB512 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		EC7B7C9D290BDE9200CCB512 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		EC7B7C9F290BE4B000CCB512 /* AlertOk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertOk.swift; sourceTree = "<group>"; };
 		EC8D6D6F2908128C000C0F61 /* TestTaskJunior.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTaskJunior.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC8D6D722908128C000C0F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC8D6D742908128C000C0F61 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +63,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC7B7C99290BDC9D00CCB512 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EC7B7C9A290BDCB600CCB512 /* UserDefaultsManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EC7B7C9C290BDE7C00CCB512 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC7B7C9D290BDE9200CCB512 /* UserModel.swift */,
+				EC7B7C9F290BE4B000CCB512 /* AlertOk.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		EC8D6D662908128C000C0F61 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				EC8D6D8929081607000C0F61 /* Controllers */,
+				EC7B7C9C290BDE7C00CCB512 /* Models */,
+				EC7B7C99290BDC9D00CCB512 /* Services */,
 				EC8D6D8A29081611000C0F61 /* Extensions */,
 			);
 			path = Sources;
@@ -224,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECC2EC0F29097A96000C4EA4 /* UITexFild + Extensions.swift in Sources */,
+				EC7B7C9B290BDCB600CCB512 /* UserDefaultsManager.swift in Sources */,
 				ECBFC6CB290A8643007DBB27 /* UIViewController + Extensions.swift in Sources */,
 				ECBFC6D5290ACB0C007DBB27 /* String + Extension.swift in Sources */,
 				ECC2EC0D29097A7D000C4EA4 /* UILabel + Extensions.swift in Sources */,
@@ -232,6 +258,8 @@
 				ECBFC6D3290AA19A007DBB27 /* SongsCollectionViewCell.swift in Sources */,
 				ECBFC6CF290A89ED007DBB27 /* DetailAlbumViewController.swift in Sources */,
 				ECC2EC0B29097968000C4EA4 /* UIStackView + Extension.swift in Sources */,
+				EC7B7C9E290BDE9200CCB512 /* UserModel.swift in Sources */,
+				EC7B7CA0290BE4B000CCB512 /* AlertOk.swift in Sources */,
 				EC8D6D732908128C000C0F61 /* AppDelegate.swift in Sources */,
 				ECBFC6CD290A886B007DBB27 /* UserInfoViewController.swift in Sources */,
 				EC8D6D752908128C000C0F61 /* SceneDelegate.swift in Sources */,
