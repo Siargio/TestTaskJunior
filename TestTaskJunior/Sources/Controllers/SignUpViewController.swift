@@ -120,7 +120,6 @@ class SignUpViewController: UIViewController {
             loginLabel.text = "Registration"
             alertOk(title: "Error", message: "Fill in all the filds and age must me 18+ y.o.")
         }
-
     }
 
     // MARK: - Setups
@@ -227,10 +226,10 @@ class SignUpViewController: UIViewController {
     func setupLayout() {
 
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             backgroundView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
             backgroundView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
