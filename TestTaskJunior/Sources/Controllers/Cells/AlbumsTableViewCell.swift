@@ -37,6 +37,29 @@ class AlbumsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    //MARK: - Setups
+
+    func configureAlbumCell(album: Album) { //обращаемся в ссылке на картинку, дату передаем в картинку и присваиваем, если нет то нил
+
+        if let urlString = album.artworkUrl100 {
+            NetworkRequest.shared.requestData(urlString: urlString) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    let image = UIImage(data: data)
+                    self?.albumLogo.image = image
+                case .failure(let error):
+                    self?.albumLogo.image = nil
+                    print("No album logo" + error.localizedDescription)
+                }
+            }
+        } else {
+            albumLogo.image = nil
+        }
+        albumNameLabel.text = album.collectionName
+        artistNameLabel.text = album.artistName
+        trackCountLabel.text = "\(album.trackCount) track"
+    }
+    
     private func setupHierarchy() {
         self.backgroundColor = .clear
         self.selectionStyle = .none
@@ -52,7 +75,6 @@ class AlbumsTableViewCell: UITableViewCell {
     }
 
     private func setupLayout() {
-
         NSLayoutConstraint.activate([
             albumLogo.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             albumLogo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
