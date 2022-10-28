@@ -75,9 +75,12 @@ class DetailAlbumViewController: UIViewController {
         artistNameLabel.text = album.artistName
         trackCountLabel.text = "\(album.trackCount) tracks:"
         releaseDateLabel.text = setDateFormat(date: album.releaseDate)
+
+        guard let url = album.artworkUrl100 else { return }
+        setImage(urlString: url)
     }
 
-    private func setDateFormat(date: String) -> String {
+    private func setDateFormat(date: String) -> String { // добавляет дату в описании альбома
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
@@ -87,6 +90,24 @@ class DetailAlbumViewController: UIViewController {
         formatDate.dateFormat = "dd-MM-yyyy"
         let date = formatDate.string(from: backendDate)
         return date
+    }
+
+    private func setImage(urlString: String?) { // добавляет картинку в описании альбома
+
+        if let url = urlString {
+            NetworkRequest.shared.requestData(urlString: url) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    let image = UIImage(data: data)
+                    self?.albumLogo.image = image
+                case .failure(let error):
+                    self?.albumLogo.image = nil
+                    print("No album logo" + error.localizedDescription)
+                }
+            }
+        } else {
+            albumLogo.image = nil
+        }
     }
 
     private func setupLayout() {
