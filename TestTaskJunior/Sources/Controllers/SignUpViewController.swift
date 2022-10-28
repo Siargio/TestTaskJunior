@@ -100,7 +100,27 @@ class SignUpViewController: UIViewController {
     // MARK: - Action
 
     @objc private func signUpButtonTapped() {
-        print("SignUpTap")
+
+        let firstNameText = firstNameTextField.text ?? ""
+        let secondNameText = secondNameTextField.text ?? ""
+        let emailText = emailTextField.text ?? ""
+        let passwordText = passwordTextField.text ?? ""
+        let phoneText = phoneNumberTextField.text ?? ""
+
+        if firstNameText.isValid(validType: nameValidType)
+            && secondNameText.isValid(validType: nameValidType)
+            && emailText.isValid(validType: emailValueType)
+            && passwordText.isValid(validType: passwordValueType)
+            && phoneText.count == 18
+            && ageIsValid() == true {
+
+            DataBase.shard.saveUser(firstName: firstNameText, secondName: secondNameText, phone: phoneText, email: emailText, password: passwordText, age: datePicker.date)
+            loginLabel.text = "Registration complete"
+        } else {
+            loginLabel.text = "Registration"
+            alertOk(title: "Error", message: "Fill in all the filds and age must me 18+ y.o.")
+        }
+
     }
 
     // MARK: - Setups
@@ -164,6 +184,7 @@ class SignUpViewController: UIViewController {
         }
     }
 
+    // проверка номера телефона
     private func setPhoneNumberMask(texField: UITextField, mask: String, string: String, range: NSRange) -> String {
 
         let text = texField.text ?? ""
@@ -232,7 +253,7 @@ class SignUpViewController: UIViewController {
     }
 }
 
-//MARK: - UITextFieldDelegate ПОД ВОПРОСОМ
+//MARK: - UITextFieldDelegate проверка на валидность
 
 extension SignUpViewController: UITextFieldDelegate {
 

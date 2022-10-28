@@ -25,6 +25,7 @@ class UserInfoViewController: UIViewController {
 
         setupHierarchy()
         setupLayout()
+        setModel()
     }
 
     // MARK: - Setups
@@ -52,5 +53,20 @@ class UserInfoViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+
+    private func setModel() {
+        guard let activeUser = DataBase.shard.activeUser else { return }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let dateString = dateFormatter.string(from: activeUser.age)
+
+        firstNameLabel.text = activeUser.firstName
+        secondNameLabel.text = activeUser.secondName
+        phoneLabel.text = activeUser.phone
+        emailLabel.text = activeUser.email
+        passwordLabel.text = activeUser.password
+        ageLabel.text = dateString
     }
 }
