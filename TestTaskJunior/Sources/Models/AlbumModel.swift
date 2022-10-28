@@ -1,10 +1,10 @@
 import Foundation
 
-struct AlbumModel: Decodable {
+struct AlbumModel: Decodable, Equatable {
     let results : [Album]
 }
 
-struct Album: Decodable {
+struct Album: Decodable, Equatable {
     let  artistName: String
     let collectionName: String
     let artworkUrl100: String?
