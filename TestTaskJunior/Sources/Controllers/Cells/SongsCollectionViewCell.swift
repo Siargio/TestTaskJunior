@@ -4,7 +4,7 @@ class SongsCollectionViewCell: UICollectionViewCell {
 
     // MARK: - UIElements
 
-    let nameSongLabel = UILabel(font: 17)
+    let nameSongLabel = UILabel(font: Metric.fontAlbumNameLabel)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,8 +26,8 @@ class SongsCollectionViewCell: UICollectionViewCell {
     func setupLayout() {
         NSLayoutConstraint.activate([
             nameSongLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            nameSongLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            nameSongLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
+            nameSongLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metric.nameSongLabelLeadingAnchor),
+            nameSongLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Metric.nameSongLabelTrailingAnchor),
             nameSongLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }

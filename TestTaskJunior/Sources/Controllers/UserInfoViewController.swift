@@ -4,17 +4,17 @@ class UserInfoViewController: UIViewController {
 
     // MARK: - UIElements
 
-    private let firstNameLabel = UILabel(text: "First Name", font: 17)
+    private let firstNameLabel = UILabel(text: "First Name", font: Metric.fontLabelUserInfoViewController)
 
-    private let secondNameLabel = UILabel(text: "Second Name", font: 17)
+    private let secondNameLabel = UILabel(text: "Second Name", font: Metric.fontLabelUserInfoViewController)
 
-    private let ageLabel = UILabel(text: "Age", font: 17)
+    private let ageLabel = UILabel(text: "Age", font: Metric.fontLabelUserInfoViewController)
 
-    private let phoneLabel = UILabel(text: "Phone", font: 17)
+    private let phoneLabel = UILabel(text: "Phone", font: Metric.fontLabelUserInfoViewController)
 
-    private let emailLabel = UILabel(text: "Email", font: 17)
+    private let emailLabel = UILabel(text: "Email", font: Metric.fontLabelUserInfoViewController)
 
-    private let passwordLabel = UILabel(text: "Password", font: 17)
+    private let passwordLabel = UILabel(text: "Password", font: Metric.fontLabelUserInfoViewController)
 
     private var stackView = UIStackView()
 
@@ -41,7 +41,7 @@ class UserInfoViewController: UIViewController {
                                                    emailLabel,
                                                    passwordLabel],
                                 axis: .vertical,
-                                spacing: 10,
+                                spacing: Metric.stackViewSpacing,
                                 distribution: .fillProportionally)
 
         view.addSubview(stackView)
@@ -49,8 +49,8 @@ class UserInfoViewController: UIViewController {
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Metric.buttonAndTextFieldsStackViewTrailing),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metric.buttonAndTextFieldsStackViewLeading),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }

@@ -17,18 +17,18 @@ class AuthViewController: UIViewController {
         return view
     }()
 
-    private let loginLabel = UILabel(text: "Login", font: 25)
+    private let loginLabel = UILabel(text: "Login", font: Metric.fontLoginLabel)
 
-    private let emailTextField = UITextField.attributedTextField(text: "Enter email")
+    private let emailTextField = UITextField.attributedTextField(text: "Enter email", isSecureTextEntry: false)
 
-    private let passwordTextField = UITextField.attributedTextField(text: "Enter password")
+    private let passwordTextField = UITextField.attributedTextField(text: "Enter password", isSecureTextEntry: true)
 
     private let signInButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("SingIn", for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = UIColor(named: "buttonIn")
         button.tintColor = .white
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = Metric.signInUPButtonCornetRadius
         button.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -37,9 +37,9 @@ class AuthViewController: UIViewController {
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("SingUp", for: .normal)
-        button.backgroundColor = .red
+        button.backgroundColor = UIColor(named: "buttonUp")
         button.tintColor = .white
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = Metric.signInUPButtonCornetRadius
         button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -114,17 +114,16 @@ class AuthViewController: UIViewController {
 
     func setupHierarchy() {
         title = "SingIn"
-        view.backgroundColor = .white
         textFieldsStackView = UIStackView(arrangedSubviews:
                                             [emailTextField, passwordTextField],
                                           axis: .vertical,
-                                          spacing: 10,
+                                          spacing: Metric.stackViewSpacing,
                                           distribution: .fillProportionally)
 
         buttonsStackView = UIStackView(arrangedSubviews:
                                         [signInButton, signUpButton],
                                        axis: .horizontal,
-                                       spacing: 10,
+                                       spacing: Metric.stackViewSpacing,
                                        distribution: .fillEqually)
 
         view.addSubview(scrollView)
@@ -148,18 +147,18 @@ class AuthViewController: UIViewController {
 
             textFieldsStackView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
             textFieldsStackView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
-            textFieldsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
-            textFieldsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20),
+            textFieldsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: Metric.buttonAndTextFieldsStackViewLeading),
+            textFieldsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: Metric.buttonAndTextFieldsStackViewTrailing),
 
             loginLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            loginLabel.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -30),
+            loginLabel.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: Metric.loginLabelBottom),
 
-            signUpButton.heightAnchor.constraint(equalToConstant: 40),
-            signInButton.heightAnchor.constraint(equalToConstant: 40),
+            signUpButton.heightAnchor.constraint(equalToConstant: Metric.buttonHeightSingInUp),
+            signInButton.heightAnchor.constraint(equalToConstant: Metric.buttonHeightSingInUp),
 
-            buttonsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
-            buttonsStackView.topAnchor.constraint(equalTo: textFieldsStackView.bottomAnchor, constant: 30),
-            buttonsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20),
+            buttonsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: Metric.buttonAndTextFieldsStackViewLeading),
+            buttonsStackView.topAnchor.constraint(equalTo: textFieldsStackView.bottomAnchor, constant: Metric.buttonsStackViewTopAnchor),
+            buttonsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: Metric.buttonAndTextFieldsStackViewTrailing),
         ])
     }
 }

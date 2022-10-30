@@ -17,17 +17,17 @@ class SignUpViewController: UIViewController {
         return view
     }()
 
-    private let loginLabel = UILabel(text: "Registration", font: 17)
+    private let loginLabel = UILabel(text: "Registration", font: Metric.fontLoginLabel)
 
-    private let firstNameTextField = UITextField.attributedTextField(text: "First Name")
+    private let firstNameTextField = UITextField.attributedTextField(text: "First Name", isSecureTextEntry: false)
 
-    private let firstNameValidLabel = UILabel(text: "Required field", font: 14)
+    private let firstNameValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
 
-    private let secondNameTextField = UITextField.attributedTextField(text: "Second Name")
+    private let secondNameTextField = UITextField.attributedTextField(text: "Second Name", isSecureTextEntry: false)
 
-    private let secondNameValidLabel = UILabel(text: "Required field", font: 14)
+    private let secondNameValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
 
-    private let ageValidLabel = UILabel(text: "Required field", font: 14)
+    private let ageValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
 
     private let phoneNumberTextField: UITextField = {
         let textField = UITextField()
@@ -37,28 +37,22 @@ class SignUpViewController: UIViewController {
         return textField
     }()
 
-    private let phoneValidLabel = UILabel(text: "Required field", font: 14)
+    private let phoneValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
 
-    private let emailTextField = UITextField.attributedTextField(text: "E-mail")
+    private let emailTextField = UITextField.attributedTextField(text: "E-mail", isSecureTextEntry: false)
 
-    private let emailValidLabel = UILabel(text: "Required field", font: 14)
+    private let emailValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
 
-    private let passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .roundedRect
-        textField.isSecureTextEntry = true
-        textField.placeholder = "Password"
-        return textField
-    }()
+    private let passwordTextField = UITextField.attributedTextField(text: "Password", isSecureTextEntry: true)
 
-    private let passwordValidLabel = UILabel(text: "Required field", font: 14)
+    private let passwordValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
 
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .black
         button.setTitle("SignUP", for: .normal)
         button.tintColor = .white
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = Metric.signInUPButtonCornetRadius
         button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -68,9 +62,9 @@ class SignUpViewController: UIViewController {
         datePicker.datePickerMode = .date
         datePicker.backgroundColor = .white
         datePicker.layer.borderColor = #colorLiteral(red: 0.8810099265, green: 0.8810099265, blue: 0.8810099265, alpha: 1)
-        datePicker.layer.borderWidth = 1
+        datePicker.layer.borderWidth = Metric.datePickerLayerBorderWidth
         datePicker.clipsToBounds = true
-        datePicker.layer.cornerRadius = 6
+        datePicker.layer.cornerRadius = Metric.datePickerLayerCornerRadius
         datePicker.tintColor = .black
     }
 
@@ -114,7 +108,12 @@ class SignUpViewController: UIViewController {
             && phoneText.count == 18
             && ageIsValid() == true {
 
-            DataBase.shard.saveUser(firstName: firstNameText, secondName: secondNameText, phone: phoneText, email: emailText, password: passwordText, age: datePicker.date)
+            DataBase.shard.saveUser(firstName: firstNameText,
+                                    secondName: secondNameText,
+                                    phone: phoneText,
+                                    email: emailText,
+                                    password: passwordText,
+                                    age: datePicker.date)
             loginLabel.text = "Registration complete"
         } else {
             loginLabel.text = "Registration"
@@ -144,7 +143,7 @@ class SignUpViewController: UIViewController {
                                              passwordTextField,
                                              passwordValidLabel],
                                         axis: .vertical,
-                                        spacing: 10,
+                                        spacing: Metric.stackViewSpacing,
                                         distribution: .fillProportionally)
 
         backgroundView.addSubview(elementsStackView)
@@ -238,16 +237,16 @@ class SignUpViewController: UIViewController {
 
             elementsStackView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
             elementsStackView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
-            elementsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
-            elementsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20),
+            elementsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: Metric.buttonAndTextFieldsStackViewLeading),
+            elementsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: Metric.buttonAndTextFieldsStackViewTrailing),
 
             loginLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            loginLabel.bottomAnchor.constraint(equalTo: elementsStackView.topAnchor, constant: -30),
+            loginLabel.bottomAnchor.constraint(equalTo: elementsStackView.topAnchor, constant: Metric.loginLabelBottomAnchor),
 
             signUpButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            signUpButton.topAnchor.constraint(equalTo: elementsStackView.bottomAnchor, constant: 30),
-            signUpButton.heightAnchor.constraint(equalToConstant: 40),
-            signUpButton.widthAnchor.constraint(equalToConstant: 300)
+            signUpButton.topAnchor.constraint(equalTo: elementsStackView.bottomAnchor, constant: Metric.signUpButtonTopAnchor),
+            signUpButton.heightAnchor.constraint(equalToConstant: Metric.buttonHeightSingInUp),
+            signUpButton.widthAnchor.constraint(equalToConstant: Metric.signUpButtonWidthAnchor)
         ])
     }
 }
