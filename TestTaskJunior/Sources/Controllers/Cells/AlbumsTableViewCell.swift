@@ -12,11 +12,11 @@ class AlbumsTableViewCell: UITableViewCell {
         return imageView
     }()
 
-    private let albumNameLabel = UILabel(text: "Name album name", font: 20)
+    private let albumNameLabel = UILabel(text: "Name album name", font: Metric.fontAlbumsTableViewCellAlbumName)
 
-    private let artistNameLabel = UILabel(text: "Name artist name", font: 16)
+    private let artistNameLabel = UILabel(text: "Name artist name", font: Metric.fontAlbumsTableViewCellArtistAndTrack)
 
-    private let trackCountLabel = UILabel(text: "16 tracks", font: 16)
+    private let trackCountLabel = UILabel(text: "16 tracks", font: Metric.fontAlbumsTableViewCellArtistAndTrack)
 
     var stackView = UIStackView()
 
@@ -69,7 +69,7 @@ class AlbumsTableViewCell: UITableViewCell {
 
         stackView = UIStackView(arrangedSubviews: [artistNameLabel, trackCountLabel],
                                 axis: .horizontal,
-                                spacing: 10,
+                                spacing: Metric.stackViewSpacing,
                                 distribution: .equalCentering)
         self.addSubview(stackView)
     }
@@ -77,17 +77,17 @@ class AlbumsTableViewCell: UITableViewCell {
     private func setupLayout() {
         NSLayoutConstraint.activate([
             albumLogo.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            albumLogo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
-            albumLogo.heightAnchor.constraint(equalToConstant: 60),
-            albumLogo.widthAnchor.constraint(equalToConstant: 60),
+            albumLogo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metric.AlbumsTableViewCellAlbumLogoLeadingAnchor),
+            albumLogo.heightAnchor.constraint(equalToConstant: Metric.AlbumsTableViewCellAlbumLogoHeightAndWightAnchor),
+            albumLogo.widthAnchor.constraint(equalToConstant: Metric.AlbumsTableViewCellAlbumLogoHeightAndWightAnchor),
 
-            albumNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            albumNameLabel.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: 10),
-            albumNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            albumNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: Metric.AlbumsTableViewCellAlbumNameLabelTopAnchor),
+            albumNameLabel.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: Metric.AlbumsTableViewCellAlbumLogoLeadingAnchor),
+            albumNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Metric.AlbumsTableViewCellAlbumNameLabelTrailingAnchor),
 
-            stackView.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+            stackView.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: Metric.AlbumsTableViewCellStackViewTopAnchor),
+            stackView.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: Metric.AlbumsTableViewCellStackViewLeadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Metric.AlbumsTableViewCellStackViewTrailingAnchor)
         ])
     }
 }

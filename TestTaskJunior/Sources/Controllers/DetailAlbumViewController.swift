@@ -11,17 +11,17 @@ class DetailAlbumViewController: UIViewController {
         return imageView
     }()
 
-    private let albumNameLabel = UILabel(text: "Name album", font: 17)
+    private let albumNameLabel = UILabel(text: "Name album", font: Metric.fontAlbumNameLabel)
 
-    private let artistNameLabel = UILabel(text: "Name artist", font: 17)
+    private let artistNameLabel = UILabel(text: "Name artist", font: Metric.fontAlbumNameLabel)
 
-    private let releaseDateLabel = UILabel(text: "Release date", font: 17)
+    private let releaseDateLabel = UILabel(text: "Release date", font: Metric.fontAlbumNameLabel)
 
-    private let trackCountLabel = UILabel(text: "10 tracks", font: 17)
+    private let trackCountLabel = UILabel(text: "10 tracks", font: Metric.fontAlbumNameLabel)
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 5
+        layout.minimumLineSpacing = Metric.collectionViewLayout
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.bounces = false
@@ -58,7 +58,7 @@ class DetailAlbumViewController: UIViewController {
                                                    releaseDateLabel,
                                                    trackCountLabel],
                                 axis: .vertical,
-                                spacing: 10,
+                                spacing: Metric.stackViewSpacing,
                                 distribution: .fillProportionally)
 
         view.addSubview(stackView)
@@ -132,19 +132,19 @@ class DetailAlbumViewController: UIViewController {
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            albumLogo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            albumLogo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            albumLogo.heightAnchor.constraint(equalToConstant: 100),
-            albumLogo.widthAnchor.constraint(equalToConstant: 100),
+            albumLogo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Metric.albumLogoTopAnchor),
+            albumLogo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metric.albumLogoLeadingAnchor),
+            albumLogo.heightAnchor.constraint(equalToConstant: Metric.albumLogoHeightAndWidthAnchor),
+            albumLogo.widthAnchor.constraint(equalToConstant: Metric.albumLogoHeightAndWidthAnchor),
 
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            stackView.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Metric.stackViewTopAnchor),
+            stackView.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: Metric.buttonAndTextFieldsStackViewLeading),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Metric.buttonAndTextFieldsStackViewTrailing),
 
-            collectionView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 0),
-            collectionView.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: 17),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
+            collectionView.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: Metric.collectionViewLeadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Metric.collectionViewTrailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Metric.collectionViewBottomAnchor)
         ])
     }
 }
@@ -164,6 +164,6 @@ extension DetailAlbumViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: 20)
+        CGSize(width: collectionView.frame.width, height: Metric.collectionViewHeight)
     }
 }
