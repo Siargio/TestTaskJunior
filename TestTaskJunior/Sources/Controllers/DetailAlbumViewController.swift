@@ -2,6 +2,9 @@ import UIKit
 
 class DetailAlbumViewController: UIViewController {
 
+    var album: Album?
+    var songs = [Song]()
+
     // MARK: - UIElements
     
     private let albumLogo: UIImageView = {
@@ -11,13 +14,10 @@ class DetailAlbumViewController: UIViewController {
         return imageView
     }()
 
-    private let albumNameLabel = UILabel(text: "Name album", font: Metric.fontAlbumNameLabel)
-
-    private let artistNameLabel = UILabel(text: "Name artist", font: Metric.fontAlbumNameLabel)
-
-    private let releaseDateLabel = UILabel(text: "Release date", font: Metric.fontAlbumNameLabel)
-
-    private let trackCountLabel = UILabel(text: "10 tracks", font: Metric.fontAlbumNameLabel)
+    private let albumNameLabel = UILabel(text: Metric.albumNameLabel, font: Metric.fontAlbumNameLabel)
+    private let artistNameLabel = UILabel(text: Metric.artistNameLabel, font: Metric.fontAlbumNameLabel)
+    private let releaseDateLabel = UILabel(text: Metric.releaseDateLabel, font: Metric.fontAlbumNameLabel)
+    private let trackCountLabel = UILabel(text: Metric.trackCountLabel, font: Metric.fontAlbumNameLabel)
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -25,16 +25,13 @@ class DetailAlbumViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.bounces = false
-        collectionView.register(SongsCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(SongsCollectionViewCell.self, forCellWithReuseIdentifier: Metric.cell)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
 
     private var stackView = UIStackView()
 
-    var album: Album?
-    var songs = [Song]()
-    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -85,11 +82,11 @@ class DetailAlbumViewController: UIViewController {
     private func setDateFormat(date: String) -> String { // добавляет дату в описании альбома
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
+        dateFormatter.dateFormat = Metric.dateFormat
         guard let backendDate = dateFormatter.date(from: date) else { return "" }
 
         let formatDate = DateFormatter()
-        formatDate.dateFormat = "dd-MM-yyyy"
+        formatDate.dateFormat = Metric.dateFormatDDMM
         let date = formatDate.string(from: backendDate)
         return date
     }
@@ -104,7 +101,7 @@ class DetailAlbumViewController: UIViewController {
                     self?.albumLogo.image = image
                 case .failure(let error):
                     self?.albumLogo.image = nil
-                    print("No album logo" + error.localizedDescription)
+                    print(Metric.urlErrorPrint + error.localizedDescription)
                 }
             }
         } else {
@@ -125,7 +122,7 @@ class DetailAlbumViewController: UIViewController {
                 self?.collectionView.reloadData()
             } else {
                 print(error!.localizedDescription)
-                self?.alertOk(title: "Error", message: error!.localizedDescription)
+                self?.alertOk(title: Metric.error, message: error!.localizedDescription)
             }
         }
     }
@@ -157,7 +154,7 @@ extension DetailAlbumViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SongsCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Metric.cell, for: indexPath) as! SongsCollectionViewCell
         let song = songs[indexPath.row].trackName
         cell.nameSongLabel.text = song
         return cell
@@ -165,5 +162,37 @@ extension DetailAlbumViewController: UICollectionViewDelegate, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: collectionView.frame.width, height: Metric.collectionViewHeight)
+    }
+}
+
+//MARK: - Metric
+
+extension DetailAlbumViewController {
+
+    enum Metric  {
+        static let fontAlbumNameLabel: Int = 18
+        static let collectionViewLayout: CGFloat = 5
+        static let stackViewSpacing: CGFloat = 10
+        static let albumLogoTopAnchor: CGFloat = 30
+        static let albumLogoLeadingAnchor: CGFloat = 20
+        static let albumLogoHeightAndWidthAnchor: CGFloat = 100
+        static let stackViewTopAnchor: CGFloat = 30
+        static let collectionViewLeadingAnchor: CGFloat = 17
+        static let collectionViewTrailingAnchor: CGFloat = -10
+        static let collectionViewBottomAnchor: CGFloat = -10
+        static let collectionViewHeight: CGFloat = 20
+        static let buttonAndTextFieldsStackViewLeading: CGFloat = 20
+        static let buttonAndTextFieldsStackViewTrailing: CGFloat = -20
+
+        static let albumNameLabel = "Name album"
+        static let artistNameLabel = "Name artist"
+        static let releaseDateLabel = "Release date"
+        static let trackCountLabel = "10 tracks"
+        static let cell = "cell"
+        static let dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
+        static let dateFormatDDMM = "dd-MM-yyyy"
+        static let urlErrorPrint = "No album logo"
+        static let error = "Error"
+
     }
 }

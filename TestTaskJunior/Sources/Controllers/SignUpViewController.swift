@@ -17,17 +17,12 @@ class SignUpViewController: UIViewController {
         return view
     }()
 
-    private let loginLabel = UILabel(text: "Registration", font: Metric.fontLoginLabel)
-
-    private let firstNameTextField = UITextField.attributedTextField(text: "First Name", isSecureTextEntry: false)
-
-    private let firstNameValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
-
-    private let secondNameTextField = UITextField.attributedTextField(text: "Second Name", isSecureTextEntry: false)
-
-    private let secondNameValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
-
-    private let ageValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
+    private let loginLabel = UILabel(text: Metric.loginLabelText, font: Metric.fontLoginLabel)
+    private let firstNameTextField = UITextField.attributedTextField(text: Metric.firstNameTextFieldText, isSecureTextEntry: false)
+    private let firstNameValidLabel = UILabel(text: Metric.requiredFieldText, font: Metric.fontRequiredField)
+    private let secondNameTextField = UITextField.attributedTextField(text: Metric.secondNameTextFieldText, isSecureTextEntry: false)
+    private let secondNameValidLabel = UILabel(text: Metric.requiredFieldText, font: Metric.fontRequiredField)
+    private let ageValidLabel = UILabel(text: Metric.requiredFieldText, font: Metric.fontRequiredField)
 
     private let phoneNumberTextField: UITextField = {
         let textField = UITextField()
@@ -37,20 +32,16 @@ class SignUpViewController: UIViewController {
         return textField
     }()
 
-    private let phoneValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
-
-    private let emailTextField = UITextField.attributedTextField(text: "E-mail", isSecureTextEntry: false)
-
-    private let emailValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
-
-    private let passwordTextField = UITextField.attributedTextField(text: "Password", isSecureTextEntry: true)
-
-    private let passwordValidLabel = UILabel(text: "Required field", font: Metric.fontRequiredField)
+    private let phoneValidLabel = UILabel(text: Metric.requiredFieldText, font: Metric.fontRequiredField)
+    private let emailTextField = UITextField.attributedTextField(text: Metric.emailTextFieldText, isSecureTextEntry: false)
+    private let emailValidLabel = UILabel(text: Metric.requiredFieldText, font: Metric.fontRequiredField)
+    private let passwordTextField = UITextField.attributedTextField(text: Metric.passwordTextFieldText, isSecureTextEntry: true)
+    private let passwordValidLabel = UILabel(text: Metric.requiredFieldText, font: Metric.fontRequiredField)
 
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .black
-        button.setTitle("SignUP", for: .normal)
+        button.setTitle(Metric.signUpButtonText, for: .normal)
         button.tintColor = .white
         button.layer.cornerRadius = Metric.signInUPButtonCornetRadius
         button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
@@ -105,7 +96,7 @@ class SignUpViewController: UIViewController {
             && secondNameText.isValid(validType: nameValidType)
             && emailText.isValid(validType: emailValueType)
             && passwordText.isValid(validType: passwordValueType)
-            && phoneText.count == 18
+            && phoneText.count == Metric.phoneTextCount
             && ageIsValid() == true {
 
             DataBase.shard.saveUser(firstName: firstNameText,
@@ -114,17 +105,17 @@ class SignUpViewController: UIViewController {
                                     email: emailText,
                                     password: passwordText,
                                     age: datePicker.date)
-            loginLabel.text = "Registration complete"
+            loginLabel.text = Metric.loginLabelTextRegistrationComplete
         } else {
-            loginLabel.text = "Registration"
-            alertOk(title: "Error", message: "Fill in all the filds and age must me 18+ y.o.")
+            loginLabel.text = Metric.loginLabelText
+            alertOk(title: Metric.errorText, message: Metric.errorTextMessage)
         }
     }
 
     // MARK: - Setups
 
     func setupHierarchy() {
-        title = "SignUp"
+        title = Metric.signUpButtonText
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
@@ -186,7 +177,6 @@ class SignUpViewController: UIViewController {
     private func setPhoneNumberMask(texField: UITextField, mask: String, string: String, range: NSRange) -> String {
 
         let text = texField.text ?? ""
-
         let phone = (text as NSString).replacingCharacters(in: range, with: string)
         let number = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
@@ -201,11 +191,11 @@ class SignUpViewController: UIViewController {
             }
         }
 
-        if result.count == 18 {
-            phoneValidLabel.text = "Phone is valid"
+        if result.count == Metric.phoneTextCount {
+            phoneValidLabel.text = Metric.phoneValidLabelText
             phoneValidLabel.textColor = .systemGreen
         } else {
-            phoneValidLabel.text = "Phone is not valid"
+            phoneValidLabel.text = Metric.phoneValidLabelTextNot
             phoneValidLabel.textColor = .red
         }
         return result
@@ -215,11 +205,10 @@ class SignUpViewController: UIViewController {
         let calendar = NSCalendar.current
         let dateNow = Date()
         let birthday = datePicker.date
-
         let age = calendar.dateComponents([.year], from: dateNow)
         let ageYear = age.year
         guard let ageUser = ageYear else { return false }
-        return (ageUser < 18 ? false : true)
+        return (ageUser < Metric.phoneTextCount ? false : true)
     }
 
     func setupLayout() {
@@ -262,37 +251,37 @@ extension SignUpViewController: UITextFieldDelegate {
             textField: firstNameTextField,
             label: firstNameValidLabel,
             validType: nameValidType,
-            validMessage: "Name is valid",
-            wrongMassage: "Only A-Z characters, min 1 character",
+            validMessage: Metric.validMessage,
+            wrongMassage: Metric.wrongMassage,
             string: string,
             range: range)
         case secondNameTextField: setTextField(
             textField: secondNameTextField,
             label: secondNameValidLabel,
             validType: nameValidType,
-            validMessage: "Name is valid",
-            wrongMassage: "Only A-Z characters, min 1 character",
+            validMessage: Metric.validMessage,
+            wrongMassage: Metric.wrongMassage,
             string: string,
             range: range)
         case emailTextField: setTextField(
             textField: emailTextField,
             label: emailValidLabel,
             validType: emailValueType,
-            validMessage: "Email is valid",
-            wrongMassage: "Email is not valid",
+            validMessage: Metric.validMessageEmail,
+            wrongMassage: Metric.wrongMassageEmail,
             string: string,
             range: range)
         case passwordTextField: setTextField(
             textField: passwordTextField,
             label: passwordValidLabel,
             validType: passwordValueType,
-            validMessage: "Password is valid",
-            wrongMassage: "Password is not valid",
+            validMessage: Metric.validMessagePassword,
+            wrongMassage: Metric.wrongMassagePassword,
             string: string,
             range: range)
         case phoneNumberTextField: phoneNumberTextField.text = setPhoneNumberMask(
             texField: phoneNumberTextField,
-            mask: "+X (XXX) XXX-XX-XX",
+            mask: Metric.mask,
             string: string,
             range: range)
         default:
@@ -339,5 +328,46 @@ extension SignUpViewController {
 
     @objc private func keyboardWillHide() {
         scrollView.contentOffset = CGPoint.zero
+    }
+}
+
+//MARK: - Metric
+
+extension SignUpViewController {
+
+    enum Metric  {
+        static let stackViewSpacing: CGFloat = 10
+        static let fontRequiredField: Int = 13
+        static let datePickerLayerBorderWidth: CGFloat = 1
+        static let datePickerLayerCornerRadius: CGFloat = 6
+        static let loginLabelBottomAnchor: CGFloat = -30
+        static let signUpButtonTopAnchor: CGFloat = 30
+        static let signUpButtonWidthAnchor: CGFloat = 300
+        static let signInUPButtonCornetRadius: CGFloat = 10
+        static let fontLoginLabel: Int = 25
+        static let buttonAndTextFieldsStackViewLeading: CGFloat = 20
+        static let buttonAndTextFieldsStackViewTrailing: CGFloat = -20
+        static let buttonHeightSingInUp: CGFloat = 40
+        static let phoneTextCount: Int = 18
+
+        static let loginLabelText: String = "Registration"
+        static let firstNameTextFieldText: String = "First Name"
+        static let requiredFieldText: String = "Required field"
+        static let secondNameTextFieldText: String = "Second Name"
+        static let emailTextFieldText: String = "E-mail"
+        static let passwordTextFieldText = "Password"
+        static let signUpButtonText = "SignUP"
+        static let loginLabelTextRegistrationComplete = "Registration complete"
+        static let errorText = "Error"
+        static let errorTextMessage = "Fill in all the filds and age must me 18+ y.o."
+        static let phoneValidLabelText = "Phone is valid"
+        static let phoneValidLabelTextNot = "Phone is not valid"
+        static let validMessage = "Name is valid"
+        static let wrongMassage = "Only A-Z characters, min 1 character"
+        static let validMessageEmail = "Email is valid"
+        static let wrongMassageEmail = "Email is not valid"
+        static let validMessagePassword = "Password is valid"
+        static let wrongMassagePassword = "Password is not valid"
+        static let mask = "+X (XXX) XXX-XX-XX"
     }
 }
