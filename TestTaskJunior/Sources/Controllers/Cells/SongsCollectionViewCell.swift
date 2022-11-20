@@ -6,6 +6,8 @@ class SongsCollectionViewCell: UICollectionViewCell {
 
     let nameSongLabel = UILabel(font: Metric.fontAlbumNameLabel)
 
+    //MARK: - Init
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -18,7 +20,7 @@ class SongsCollectionViewCell: UICollectionViewCell {
     }
 
     // MARK: - Setup
-    
+
     func setupHierarchy() {
         self.addSubview(nameSongLabel)
     }
@@ -30,5 +32,16 @@ class SongsCollectionViewCell: UICollectionViewCell {
             nameSongLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Metric.nameSongLabelTrailingAnchor),
             nameSongLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
+    }
+}
+
+//MARK: - Metric
+
+extension SongsCollectionViewCell {
+
+    enum Metric  {
+        static let fontAlbumNameLabel: Int = 18
+        static let nameSongLabelLeadingAnchor: CGFloat = 5
+        static let nameSongLabelTrailingAnchor: CGFloat = -5
     }
 }

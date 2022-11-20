@@ -4,18 +4,12 @@ class UserInfoViewController: UIViewController {
 
     // MARK: - UIElements
 
-    private let firstNameLabel = UILabel(text: "First Name", font: Metric.fontLabelUserInfoViewController)
-
-    private let secondNameLabel = UILabel(text: "Second Name", font: Metric.fontLabelUserInfoViewController)
-
-    private let ageLabel = UILabel(text: "Age", font: Metric.fontLabelUserInfoViewController)
-
-    private let phoneLabel = UILabel(text: "Phone", font: Metric.fontLabelUserInfoViewController)
-
-    private let emailLabel = UILabel(text: "Email", font: Metric.fontLabelUserInfoViewController)
-
-    private let passwordLabel = UILabel(text: "Password", font: Metric.fontLabelUserInfoViewController)
-
+    private let firstNameLabel = UILabel(text: Metric.firstNameLabelText, font: Metric.fontLabelUserInfoViewController)
+    private let secondNameLabel = UILabel(text: Metric.secondNameLabelText, font: Metric.fontLabelUserInfoViewController)
+    private let ageLabel = UILabel(text: Metric.ageLabelText, font: Metric.fontLabelUserInfoViewController)
+    private let phoneLabel = UILabel(text: Metric.phoneLabelText, font: Metric.fontLabelUserInfoViewController)
+    private let emailLabel = UILabel(text: Metric.emailLabelText, font: Metric.fontLabelUserInfoViewController)
+    private let passwordLabel = UILabel(text: Metric.passwordLabelText, font: Metric.fontLabelUserInfoViewController)
     private var stackView = UIStackView()
 
     // MARK: - LifeCycle
@@ -31,7 +25,7 @@ class UserInfoViewController: UIViewController {
     // MARK: - Setups
 
     private func setupHierarchy() {
-        title = "Active User"
+        title = Metric.title
         view.backgroundColor = .white
 
         stackView = UIStackView(arrangedSubviews: [firstNameLabel,
@@ -59,7 +53,7 @@ class UserInfoViewController: UIViewController {
         guard let activeUser = DataBase.shard.activeUser else { return }
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy"
+        dateFormatter.dateFormat = Metric.dateFormat
         let dateString = dateFormatter.string(from: activeUser.age)
 
         firstNameLabel.text = activeUser.firstName
@@ -68,5 +62,26 @@ class UserInfoViewController: UIViewController {
         emailLabel.text = activeUser.email
         passwordLabel.text = activeUser.password
         ageLabel.text = dateString
+    }
+}
+
+//MARK: - Metric
+
+extension UserInfoViewController {
+
+    enum Metric  {
+        static let fontLabelUserInfoViewController: Int = 20
+        static let stackViewSpacing: CGFloat = 10
+        static let buttonAndTextFieldsStackViewLeading: CGFloat = 20
+        static let buttonAndTextFieldsStackViewTrailing: CGFloat = -20
+
+        static let firstNameLabelText = "First Name"
+        static let secondNameLabelText = "Second Name"
+        static let ageLabelText = "Age"
+        static let phoneLabelText = "Phone"
+        static let emailLabelText = "Email"
+        static let passwordLabelText = "Password"
+        static let title = "Active User"
+        static let dateFormat = "dd.MM.yyyy"
     }
 }

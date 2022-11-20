@@ -2,12 +2,15 @@ import UIKit
 
 class AlbumsViewController: UIViewController {
 
+    var albums = [Album]()
+    var timer: Timer?
+
     // MARK: - UIElements
 
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
-        tableView.register(AlbumsTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(AlbumsTableViewCell.self, forCellReuseIdentifier: Metric.cell)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -27,9 +30,6 @@ class AlbumsViewController: UIViewController {
 
     // MARK: - Setups
 
-    var albums = [Album]()
-    var timer: Timer?
-
     func setupHierarchy() {
         view.backgroundColor = .white
         view.addSubview(tableView)
@@ -38,14 +38,12 @@ class AlbumsViewController: UIViewController {
     private func setupDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
-        
         searchController.searchBar.delegate = self
     }
     
     
     private func setNavigationBar() {
-        navigationItem.title = "Albums"
-        
+        navigationItem.title = Metric.navigationItemTitle
         navigationItem.searchController = searchController
         
         let userInfoButton = createCustomButton(selector: #selector(userInfoButtonTapped))
@@ -53,7 +51,7 @@ class AlbumsViewController: UIViewController {
     }
     
     private func setupSearchController() {
-        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.placeholder = Metric.placeholder
         searchController.obscuresBackgroundDuringPresentation = false
     }
 
@@ -76,11 +74,8 @@ class AlbumsViewController: UIViewController {
         let urlString = "https://itunes.apple.com/search?term=\(albumName)&entity=album&attribute=albumTerm"
 
         NetworkDataFetch.shared.fetchAlbum(urlString: urlString) { [weak self] albumModel, error in
-
             if error == nil {
-
                 guard let albumModel = albumModel else { return }
-
                 if albumModel.results != [] {
                     let sortedAlbums = albumModel.results.sorted { firstItem, secondItem in
                         return firstItem.collectionName.compare(secondItem.collectionName) == ComparisonResult.orderedAscending
@@ -88,7 +83,7 @@ class AlbumsViewController: UIViewController {
                     self?.albums = sortedAlbums
                     self?.tableView.reloadData()
                 }else {
-                    self?.alertOk(title: "Error", message: "Album no found. Add some words")
+                    self?.alertOk(title: Metric.error, message: Metric.errorMessage)
                 }
             } else {
                 print(error!.localizedDescription)
@@ -105,7 +100,7 @@ extension AlbumsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AlbumsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Metric.cell, for: indexPath) as! AlbumsTableViewCell
         let album = albums[indexPath.row]
         cell.configureAlbumCell(album: album)
         return cell
@@ -116,7 +111,7 @@ extension AlbumsViewController: UITableViewDataSource {
 
 extension AlbumsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        70
+        Metric.heightForRowAt
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -137,8 +132,24 @@ extension AlbumsViewController: UISearchBarDelegate {
 
         if text != "" {
             timer?.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self ] _ in self?.fetchAlbums(albumName: text ?? "")
+            timer = Timer.scheduledTimer(withTimeInterval: Metric.timeInterval, repeats: false, block: { [weak self ] _ in self?.fetchAlbums(albumName: text ?? "")
             })
         }
+    }
+}
+
+//MARK: - Metric
+
+extension AlbumsViewController {
+
+    enum Metric  {
+        static let heightForRowAt: CGFloat = 70
+        static let timeInterval = 0.5
+
+        static let cell = "cell"
+        static let navigationItemTitle = "Albums"
+        static let placeholder = "Search"
+        static let error = "Error"
+        static let errorMessage = "Album no found. Add some words"
     }
 }

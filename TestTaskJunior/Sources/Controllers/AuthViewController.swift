@@ -17,16 +17,14 @@ class AuthViewController: UIViewController {
         return view
     }()
 
-    private let loginLabel = UILabel(text: "Login", font: Metric.fontLoginLabel)
-
-    private let emailTextField = UITextField.attributedTextField(text: "Enter email", isSecureTextEntry: false)
-
-    private let passwordTextField = UITextField.attributedTextField(text: "Enter password", isSecureTextEntry: true)
+    private let loginLabel = UILabel(text: Metric.loginLabelText, font: Metric.fontLoginLabel)
+    private let emailTextField = UITextField.attributedTextField(text: Metric.emailTextFieldText, isSecureTextEntry: false)
+    private let passwordTextField = UITextField.attributedTextField(text: Metric.passwordTextFieldText, isSecureTextEntry: true)
 
     private let signInButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("SingIn", for: .normal)
-        button.backgroundColor = UIColor(named: "buttonIn")
+        button.setTitle(Metric.signInButtonSetTitle, for: .normal)
+        button.backgroundColor = UIColor(named: Metric.signInButtonBackgroundColor)
         button.tintColor = .white
         button.layer.cornerRadius = Metric.signInUPButtonCornetRadius
         button.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
@@ -36,8 +34,8 @@ class AuthViewController: UIViewController {
 
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("SingUp", for: .normal)
-        button.backgroundColor = UIColor(named: "buttonUp")
+        button.setTitle(Metric.signUpButtonSetTitle, for: .normal)
+        button.backgroundColor = UIColor(named: Metric.signUnButtonBackgroundColor)
         button.tintColor = .white
         button.layer.cornerRadius = Metric.signInUPButtonCornetRadius
         button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
@@ -79,17 +77,16 @@ class AuthViewController: UIViewController {
         let user = findUserDataBase(mail: mail)
 
         if user == nil {
-            loginLabel.text = "User not found"
+            loginLabel.text = Metric.buttonLoginLabelText
             loginLabel.textColor = .red
         } else if user?.password == password {
             let navVC = UINavigationController(rootViewController: AlbumsViewController())
             navVC.modalPresentationStyle = .fullScreen
             self.present(navVC, animated: true)
-
             guard let activeUser = user else { return }
             DataBase.shard.saveActiveUser(user: activeUser)
         } else {
-            loginLabel.text = "Wrong password"
+            loginLabel.text = Metric.buttonLoginLabelTextWrong
             loginLabel.textColor = .red
         }
     }
@@ -113,7 +110,7 @@ class AuthViewController: UIViewController {
     private var stackViewTextViewAndButtonView = UIStackView()
 
     func setupHierarchy() {
-        title = "SingIn"
+        title = Metric.setupHierarchyTitle
         textFieldsStackView = UIStackView(arrangedSubviews:
                                             [emailTextField, passwordTextField],
                                           axis: .vertical,
@@ -203,5 +200,32 @@ extension AuthViewController {
 
     @objc private func keyboardWillHide() {
         scrollView.contentOffset = CGPoint.zero
+    }
+}
+
+//MARK: - Metric
+
+extension AuthViewController {
+
+    enum Metric  {
+        static let fontLoginLabel: Int = 25
+        static let signInUPButtonCornetRadius: CGFloat = 10
+        static let stackViewSpacing: CGFloat = 10
+        static let buttonAndTextFieldsStackViewLeading: CGFloat = 20
+        static let buttonAndTextFieldsStackViewTrailing: CGFloat = -20
+        static let loginLabelBottom: CGFloat = -30
+        static let buttonHeightSingInUp: CGFloat = 40
+        static let buttonsStackViewTopAnchor: CGFloat = 30
+
+        static let loginLabelText: String = "Login"
+        static let emailTextFieldText: String = "Enter email"
+        static let passwordTextFieldText: String = "Enter password"
+        static let signInButtonSetTitle: String = "SingIn"
+        static let signInButtonBackgroundColor: String = "buttonIn"
+        static let signUpButtonSetTitle: String = "SingUp"
+        static let signUnButtonBackgroundColor: String = "buttonUp"
+        static let buttonLoginLabelText: String = "User not found"
+        static let buttonLoginLabelTextWrong: String = "Wrong password"
+        static let setupHierarchyTitle: String = "SingIn"
     }
 }
