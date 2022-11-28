@@ -69,6 +69,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC2652DC29350AAE00AE6822 /* UserInfoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				ECBFC6CC290A886B007DBB27 /* UserInfoViewController.swift */,
+			);
+			path = UserInfoViewController;
+			sourceTree = "<group>";
+		};
+		EC2652DD29350ACE00AE6822 /* DetailAlbumViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EC2652E129350B7C00AE6822 /* Cell */,
+				ECBFC6CE290A89ED007DBB27 /* DetailAlbumViewController.swift */,
+			);
+			path = DetailAlbumViewController;
+			sourceTree = "<group>";
+		};
+		EC2652DE29350AE500AE6822 /* AlbumsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EC8D6D8C290817E3000C0F61 /* Cells */,
+				ECBFC6C8290A8448007DBB27 /* AlbumsViewController.swift */,
+			);
+			path = AlbumsViewController;
+			sourceTree = "<group>";
+		};
+		EC2652DF29350AF700AE6822 /* SingUpViewController */ = {
+			isa = PBXGroup;
+			children = (
+				ECC2EC1029097FB3000C4EA4 /* SignUpViewController.swift */,
+			);
+			path = SingUpViewController;
+			sourceTree = "<group>";
+		};
+		EC2652E029350B0500AE6822 /* AuthViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EC8D6D762908128C000C0F61 /* AuthViewController.swift */,
+			);
+			path = AuthViewController;
+			sourceTree = "<group>";
+		};
+		EC2652E129350B7C00AE6822 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				ECBFC6D2290AA19A007DBB27 /* SongsCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		EC7B7C99290BDC9D00CCB512 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,12 +206,11 @@
 		EC8D6D8929081607000C0F61 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EC8D6D8C290817E3000C0F61 /* Cells */,
-				EC8D6D762908128C000C0F61 /* AuthViewController.swift */,
-				ECC2EC1029097FB3000C4EA4 /* SignUpViewController.swift */,
-				ECBFC6C8290A8448007DBB27 /* AlbumsViewController.swift */,
-				ECBFC6CE290A89ED007DBB27 /* DetailAlbumViewController.swift */,
-				ECBFC6CC290A886B007DBB27 /* UserInfoViewController.swift */,
+				EC2652E029350B0500AE6822 /* AuthViewController */,
+				EC2652DF29350AF700AE6822 /* SingUpViewController */,
+				EC2652DE29350AE500AE6822 /* AlbumsViewController */,
+				EC2652DD29350ACE00AE6822 /* DetailAlbumViewController */,
+				EC2652DC29350AAE00AE6822 /* UserInfoViewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -178,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				ECBFC6D0290A8B83007DBB27 /* AlbumsTableViewCell.swift */,
-				ECBFC6D2290AA19A007DBB27 /* SongsCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
