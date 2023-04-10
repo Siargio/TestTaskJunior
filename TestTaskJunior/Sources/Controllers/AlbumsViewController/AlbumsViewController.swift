@@ -9,7 +9,6 @@ class AlbumsViewController: UIViewController {
 
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
         tableView.register(AlbumsTableViewCell.self, forCellReuseIdentifier: Metric.cell)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -21,7 +20,6 @@ class AlbumsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupDelegate()
         setNavigationBar()
         setupHierarchy()
@@ -141,7 +139,6 @@ extension AlbumsViewController: UISearchBarDelegate {
 //MARK: - Metric
 
 extension AlbumsViewController {
-
     enum Metric  {
         static let heightForRowAt: CGFloat = 70
         static let timeInterval = 0.5

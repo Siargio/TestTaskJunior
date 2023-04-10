@@ -10,7 +10,6 @@ class SongsCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         setupHierarchy()
         setupLayout()
     }
@@ -38,7 +37,6 @@ class SongsCollectionViewCell: UICollectionViewCell {
 //MARK: - Metric
 
 extension SongsCollectionViewCell {
-
     enum Metric  {
         static let fontAlbumNameLabel: Int = 18
         static let nameSongLabelLeadingAnchor: CGFloat = 5

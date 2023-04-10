@@ -16,7 +16,6 @@ class UserInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupHierarchy()
         setupLayout()
         setModel()
@@ -68,7 +67,6 @@ class UserInfoViewController: UIViewController {
 //MARK: - Metric
 
 extension UserInfoViewController {
-
     enum Metric  {
         static let fontLabelUserInfoViewController: Int = 20
         static let stackViewSpacing: CGFloat = 10

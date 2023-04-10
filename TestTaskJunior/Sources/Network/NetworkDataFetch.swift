@@ -19,7 +19,7 @@ class NetworkDataFetch {
                     print("Failed to decode JSON", jsonError)
                 }
             case .failure(let error):
-                print("Error received reuesting data: \(error.localizedDescription)")
+                print("Error received requesting data: \(error.localizedDescription)")
                 responce(nil, error)
             }
         }
@@ -38,7 +38,7 @@ class NetworkDataFetch {
                     print("Failed to decode JSON", jsonError)
                 }
             case .failure(let error):
-                print("Error received reuesting data: \(error.localizedDescription)")
+                print("Error received requesting data: \(error.localizedDescription)")
                 responce(nil, error)
             }
         }

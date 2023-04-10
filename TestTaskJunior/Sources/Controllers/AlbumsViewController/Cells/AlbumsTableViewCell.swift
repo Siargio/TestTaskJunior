@@ -95,7 +95,6 @@ class AlbumsTableViewCell: UITableViewCell {
     //MARK: - Metric
 
 extension AlbumsTableViewCell {
-
     enum Metric {
         static let albumNameLabelText: String = "Name album name"
         static let artistNameLabelText: String = "Name artist name"
