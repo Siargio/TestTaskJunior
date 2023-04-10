@@ -21,7 +21,7 @@ class AuthViewController: UIViewController {
     private let emailTextField = UITextField.attributedTextField(text: Metric.emailTextFieldText, isSecureTextEntry: false)
     private let passwordTextField = UITextField.attributedTextField(text: Metric.passwordTextFieldText, isSecureTextEntry: true)
 
-    private let signInButton: UIButton = {
+    private lazy var signInButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(Metric.signInButtonSetTitle, for: .normal)
         button.backgroundColor = UIColor(named: Metric.signInButtonBackgroundColor)
@@ -32,7 +32,7 @@ class AuthViewController: UIViewController {
         return button
     }()
 
-    private let signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(Metric.signUpButtonSetTitle, for: .normal)
         button.backgroundColor = UIColor(named: Metric.signUnButtonBackgroundColor)
@@ -52,6 +52,16 @@ class AuthViewController: UIViewController {
         setupLayout()
         setupDelegate()
         registerKeyboardNotification()
+
+//        let dataBase = DataBase.shard.users
+//        print(dataBase)
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        UserDefaults.standard.synchronize()
+//        print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
+//        if let bundleID = Bundle.main.bundleIdentifier {
+//            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+//        }
     }
 
     deinit {

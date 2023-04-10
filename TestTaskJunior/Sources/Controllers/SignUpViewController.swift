@@ -38,7 +38,7 @@ class SignUpViewController: UIViewController {
     private let passwordTextField = UITextField.attributedTextField(text: Metric.passwordTextFieldText, isSecureTextEntry: true)
     private let passwordValidLabel = UILabel(text: Metric.requiredFieldText, font: Metric.fontRequiredField)
 
-    private let signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .black
         button.setTitle(Metric.signUpButtonText, for: .normal)
@@ -70,7 +70,6 @@ class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupHierarchy()
         setupLayout()
         setupDelegate()
