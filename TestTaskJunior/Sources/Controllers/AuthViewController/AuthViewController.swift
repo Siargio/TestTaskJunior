@@ -52,6 +52,16 @@ class AuthViewController: UIViewController {
         setupLayout()
         setupDelegate()
         registerKeyboardNotification()
+
+//        let dataBase = DataBase.shard.users
+//        print(dataBase)
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        UserDefaults.standard.synchronize()
+//        print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
+//        if let bundleID = Bundle.main.bundleIdentifier {
+//            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+//        }
     }
 
     deinit {
